@@ -1,52 +1,32 @@
-# Little Backup Box
+# Backup Box
 
-Bash shell scripts that transform a Raspberry Pi (or any single-board computer running a Debian-based Linux distribution) into an inexpensive, fully-automatic, pocketable photo backup and streaming device.
+Bash shell scripts that transform a Raspberry Pi (or any single-board computer running a Debian-based Linux distribution) into an inexpensive, fully-automatic, pocketable files backup device.
 
-<img src="http://i.imgur.com/xrpfK9h.jpg" alt="" width="375"/>
+The project is based on the [Little Backup Box](https://github.com/dmpop/little-backup-box) created by Dmitri Popov.
 
 ## Installation
 
-Install Git and screen:
+1. Copy `backup.sh`, `install.sh` and `remove.sh` to one catalog on your Raspberry Pi
+2. Run `chmod +x install.sh` command to make `install.sh` file executable
+3. Run `./install.sh`
+4. You can remove `backup.sh`, `install.sh` and `remove.sh` files
 
-    sudo apt install git-core screen
+## Uninstallation
 
-Clone the Little Backup Box Git repository on your Raspberry Pi:
-
-    git clone https://gitlab.com/dmpop/little-backup-box.git
-
-Switch to the *little-backup-box* directory and make the *install-little-backup-box.sh* script executable:
-
-```
-cd little-backup-box
-chmod +x install-little-backup-box.sh
-```
-
-Run the installer script:
-
-    ./install-little-backup-box.sh
+1. Go to `~/.backup-box`
+2. Run `./remove.sh`
 
 ## Usage
 
-1. Boot the Raspberry Pi
-2. Plug in the backup storage device
-3. Plug in the card reader and wait till the Raspberry Pi shuts down
+1. Boot the Raspberry Pi (LED: `heartbeat`)
+2. Plug in the backup storage device (LED: `blink, 1000ms on`)
+3. Plug in the storage with files you want to copy (LED: `blink, 500ms on` then change to `blink, 250ms on, 250ms off``)
+4. Wait till the Raspberry Pi shutdown (LED: `off`)
 
-**Note:** To differentiate between different storage cards, the backup script assigns a random 8-digit identifying number to each card (this number is stored in the *CARD_ID* file in the root of the card). The contents of the card is saved on the storage device in a folder with the identifying number as its name.
+# Additional information
 
-# Problems?
-
-Please report bugs and issues in the [Issues](https://gitlab.com/dmpop/little-backup-box/issues) section.
-
-## Linux Photography
-
-Little Backup Box is a part of a streamlined and automated Linux-based photographic workflow described in the [Linux Photography](https://gumroad.com/l/linux-photography) book. The book provides step-by-step instructions on building a Raspberry Pi-based photo backup device running the Little Backup Box script. Get your copy at [Gumroad](https://gumroad.com/l/linux-photography).
-
-<img src="https://scribblesandsnaps.files.wordpress.com/2016/07/linux-photography-6.jpg" width="200"/>
-
-
-## Author
-
-Dmitri Popov [dmpop@linux.com](mailto:dmpop@linux.com)
+If you connect the HDD to the Raspberry Pi you can need add this `max_usb_current=1` to `/boot/config.txt` file.
+You do it at your own risk!
 
 ## License
 
