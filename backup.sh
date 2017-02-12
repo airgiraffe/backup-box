@@ -51,7 +51,7 @@ if [ ! -z $STORAGE_2_READER ]; then
   sudo sh -c "echo 500 > /sys/class/leds/led0/delay_on"
   # Create new dir on storage-1 based on time and random suffix
   BACKUP_DIR="backup_`date +%Y-%m-%d_%H-%M-%S`_`head /dev/urandom | tr -dc A-Za-z0-9 | head -c10`"
-  BACKUP_PATH=$STORAGE_1_MOUNT_POINT/"$BACKUP_DIR"
+  BACKUP_PATH="$STORAGE_1_MOUNT_POINT/$BACKUP_DIR"
   echo "$($TIME) Creating directory in the storage-1: $BACKUP_PATH"
   mkdir -p $BACKUP_PATH
   # Set the ACT LED to blink at 250ms to indicate that the rsync starts
@@ -65,8 +65,8 @@ if [ ! -z $STORAGE_2_READER ]; then
   # Turn off the ACT LED to indicate that the backup is completed
   sudo sh -c "echo 0 > /sys/class/leds/led0/brightness"
   echo "$($TIME) Copying log file from $LOG_FILE to $BACKUP_PATH/backup.log and shutdown"
-  cp $LOG_FILE $BACKUP_PATH/"backup.log"
-  echo -n "" > $BACKUP_PATH/"backup.log"
+  cp $LOG_FILE "$BACKUP_PATH/backup.log"
+  echo -n "" > $LOG_FILE
 fi
 
 # Shutdown
